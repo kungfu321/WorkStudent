@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Employer;
+namespace App\Http\Controllers\User;
 
-use App\Models\Employer\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -10,8 +9,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class PostController extends Controller
+class UserController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +19,19 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(15);
-        return $posts;
+        //
+    }
+
+    /**
+     * save job of user.
+     * @param $job_id
+     * @return array
+     * @internal param $id
+     */
+    public function saveJob($job_id)
+    {
+        $user = User::find(Auth::user()->id);
+        return $user->JobUser()->sync($job_id);
     }
 
     /**
@@ -41,20 +52,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        $post = new Post();
-        $post->user_id = Auth::user()->id;
-        $post->company_id = User::Compay()->id;
-//        $post->user_id = $input['user_id'];
-//        $post->company_id = $input['company_id'];
-
-        $post->title = $input['title'];
-        $post->description = $input['description'];
-        $post->skill = $input['skill'];
-        $post->wage = $input['wage'];
-        $post->phone_number = $input['phone_number'];
-        $post->location = $input['location'];
-        $post->save();
+        //
     }
 
     /**
@@ -88,17 +86,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->all();
-
-        $post = Post::findOrFail($id);
-        $post->title = $input['title'];
-        $post->description = $input['description'];
-        $post->skill = $input['skill'];
-        $post->wage = $input['wage'];
-        $post->phone_number = $input['phone_number'];
-        $post->location = $input['location'];
-        $post->save();
-
+        //
     }
 
     /**
@@ -109,6 +97,6 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        Post::destroy($id);
+        //
     }
 }

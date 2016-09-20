@@ -15,6 +15,8 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table = 'users';
+
     protected $fillable = [
         'name', 'email', 'facebook_id', 'google_id', 'avatar'
     ];
@@ -41,5 +43,10 @@ class User extends Authenticatable
     public function Company()
     {
         return $this->hasOne('App\Models\Company', 'user_id');
+    }
+
+    public function JobUser()
+    {
+        return $this->belongsToMany('App\Models\Employer\Post');
     }
 }

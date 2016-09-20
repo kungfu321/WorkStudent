@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostTagTable extends Migration
+class CreateUserPostTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreatePostTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_tag', function (Blueprint $table) {
+        Schema::create('user_post', function (Blueprint $table) {
+            $table->integer('user_id')->unsigned();
             $table->integer('post_id')->unsigned();
-            $table->integer('tag_id')->unsigned();
 
             $table->foreign('post_id')->references('id')->on('posts')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('tag_id')->references('id')->on('tags')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->primary(array('post_id', 'tag_id'));
+            $table->primary(array('user_id', 'post_id'));
         });
     }
 
@@ -31,6 +31,6 @@ class CreatePostTagTable extends Migration
      */
     public function down()
     {
-        Schema::drop('post_tag');
+        Schema::drop('user_post');
     }
 }

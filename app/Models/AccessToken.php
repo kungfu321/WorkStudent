@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class AccessToken extends Model
 {
-
-    protected $fillable = [
-        'facebook_token', 'google_token',
-    ];
+    protected $table = 'access_tokens';
+    protected $fillable = ['facebook_token', 'google_token'];
 
 //    public function User()
 //    {

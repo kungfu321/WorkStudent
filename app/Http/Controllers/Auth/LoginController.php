@@ -20,7 +20,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = 'home';
 
     /**
      * Create a new controller instance.
@@ -111,7 +111,8 @@ class LoginController extends Controller
 
     public function logout()
     {
-        if (Auth::check()) Auth::logout();
+        if (!Auth::check()) return redirect('404');
+        Auth::logout();
         return redirect('/');
     }
 }

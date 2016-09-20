@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class Post extends Model
 {
     use Sluggable;
+    protected $table = 'posts';
     protected $fillable = ['title', 'description', 'skill', 'wage', 'phone_number', 'location'];
 
 
